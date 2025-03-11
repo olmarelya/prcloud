@@ -1,0 +1,24 @@
+---
+- name: Установка пакетов и добавление устройства в группу
+  hosts: all
+  gather_facts: false
+
+  tasks:
+    - name: Установить Chocolatey
+      win_chocolatey:
+        name: chocolatey
+        state: present
+
+    - name: Установить пакеты cmatrix, cowsay и sl
+      win_chocolatey:
+        name: "{{ item }}"
+        state: present
+      loop:
+        - cmatrix
+        - cowsay
+        - sl
+
+    - name: Добавить устройство в группу Arimova
+      add_host:
+        name: "{{ ansible_host }}"
+        groups: Arimova
