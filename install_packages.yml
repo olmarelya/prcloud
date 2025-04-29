@@ -1,0 +1,13 @@
+---
+- name: Install required packages on server(s)
+  hosts: olmarel
+  become: yes
+  tasks:
+    - name: Ensure necessary packages are installed
+      apt:
+        name: "{{ item }}"
+        state: present
+      loop:
+        - cmatrix
+        - cowsay
+        - sl
