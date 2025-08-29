@@ -1,13 +1,20 @@
 ---
-- name: Install required packages on server(s)
-  hosts: olmarel
+- name: Install fun packages
+  hosts: Arimova
   become: yes
+
   tasks:
-    - name: Ensure necessary packages are installed
-      apt:
-        name: "{{ item }}"
+    - name: Ensure cmatrix is installed
+      ansible.builtin.package:
+        name: cmatrix
         state: present
-      loop:
-        - cmatrix
-        - cowsay
-        - sl
+
+    - name: Ensure cowsay is installed
+      ansible.builtin.package:
+        name: cowsay
+        state: present
+
+    - name: Ensure sl is installed
+      ansible.builtin.package:
+        name: sl
+        state: present
